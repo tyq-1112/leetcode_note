@@ -1,0 +1,48 @@
+#cinlude<bits/stdc++.h>
+
+using namespace std;
+
+class Solution {
+public:
+
+    int cnt[40];
+
+    int singleNumber(vector<int>& nums) {
+        for(auto &x : nums){
+            for(int i = 0 ; i <= 31 ; i++){
+                cnt[i] += (x>>i&1);
+            }
+        }
+
+        int ans = 0;
+        for(int i=31;i>=0;i--){
+            if(cnt[i] % 3 == 1) ans += 1<<i;
+        }
+
+        return ans;
+    }
+};
+
+
+/*
+在一个数组 nums 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。
+
+ 
+
+示例 1：
+
+输入：nums = [3,4,3,3]
+输出：4
+示例 2：
+
+输入：nums = [9,1,7,9,7,9,7]
+输出：1
+ 
+
+限制：
+
+1 <= nums.length <= 10000
+1 <= nums[i] < 2^31
+
+
+*/
