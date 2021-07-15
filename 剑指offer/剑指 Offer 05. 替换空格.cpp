@@ -4,20 +4,25 @@ using namespace std;
 
 class Solution {
 public:
-    string replaceSpace(string s) {     //字符数组
-        string array;   //存储结果
+    string replaceSpace(string s) {
+        int count = 0, len = s.size();
+        // 统计空格数量
+        for (char c : s) 
+            if (c == ' ') count++;
         
-        for(auto &c : s){   //遍历原字符串
-            if(c == ' '){
-                array.push_back('%');
-                array.push_back('2');
-                array.push_back('0');
-            }
-            else{
-                array.push_back(c);
+        s.resize(len + 2 * count);
+
+        for(int i = len - 1, j = s.size() - 1; i < j; i--, j--) {
+            if (s[i] != ' ')
+                s[j] = s[i];
+            else {
+                s[j - 2] = '%';
+                s[j - 1] = '2';
+                s[j] = '0';
+                j -= 2;
             }
         }
-        return array;
+        return s;
     }
 };
 
